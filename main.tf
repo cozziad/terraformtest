@@ -13,5 +13,7 @@ resource "aws_instance" "example" {
     tags = {
         Name = "${terraform.workspace}"
     }
+    count = "${lookup(var.ami_count, terraform.workspace)}"
     ami = "ami-2757f631"
     instance_type = "t2.micro"
+}

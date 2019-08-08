@@ -1,0 +1,7 @@
+**/plugins
+*.DS_STORE
+.tfstate
+*.terraform
+*.tfstate*
+*.tfstate.backup*
+*/modules/terraform*

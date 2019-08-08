@@ -9,11 +9,12 @@ terraform {
   backend "local" {}
 }
 
-resource "aws_instance" "example" {
-    tags = {
-        Name = "${terraform.workspace}"
-    }
-    count = "${lookup(var.ami_count, terraform.workspace)}"
+resource "aws_instance" "app-server" {
+    count = "${lookup(var.app_ami_count, terraform.workspace)}"
     ami = "ami-2757f631"
-    instance_type = "t2.micro"
+    instance_type = "${lookup(var.app_ami_instance_type, terraform.workspace)}"
+    tags = {
+        Name = "${terraform.workspace}-app-${count.index + 1}"
+    }
+    
 }
